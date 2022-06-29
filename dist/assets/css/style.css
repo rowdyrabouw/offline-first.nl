@@ -1,82 +1,83 @@
 @font-face {
-  font-family: "neulandinline";
-  src: url("../fonts/neuland_inline.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
+	font-family: "neulandinline";
+	src: url("../fonts/neuland_inline.woff2") format("woff2");
+	font-weight: normal;
+	font-style: normal;
 }
 
 :root {
-  --primary: rgb(250, 250, 250);
-  --secondary: rgb(255, 27, 2);
-  --tertiary: rgb(254, 245, 6);
-  --dark: rgb(34, 34, 35);
-  --light: rgb(220, 220, 220);
+	--primary: rgb(250, 250, 250);
+	--secondary: rgb(255, 27, 2);
+	--tertiary: rgb(254, 246, 6);
+	--dark: rgb(34, 34, 35);
+	--light: rgb(220, 220, 220);
 }
 
 html {
-  background-color: var(--secondary);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.5rem;
-  color: var(--light);
+	background-color: var(--dark);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.5rem;
+	color: var(--light);
 }
 
 body {
-  margin: 0;
-  padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 main {
-  background-color: var(--dark);
-  max-width: 700px;
-  margin: 0 auto;
-  min-height: 200vh;
-  padding-bottom: 4rem;
+	border-left: 12px solid var(--secondary);
+	border-right: 12px solid var(--secondary);
+	max-width: 700px;
+	margin: 0 auto;
+	min-height: 200vh;
+	padding-bottom: 4rem;
 }
 
 h1 {
-  font-family: "neulandinline";
-  font-weight: normal;
-  font-style: normal;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: var(--primary);
-  text-align: center;
-  margin: 0;
-  padding: 0.5rem 0;
-  text-shadow: 1px 1px var(--secondary);
+	font-family: "neulandinline";
+	font-weight: normal;
+	font-style: normal;
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	color: var(--primary);
+	text-align: center;
+	margin: 0;
+	padding: 0.5rem 0;
+	text-shadow: 1px 1px var(--secondary);
 }
 
 h2 {
-  font-family: "neulandinline";
-  font-weight: normal;
-  font-style: normal;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: var(--primary);
-  text-align: center;
-  margin: 0;
-  padding: 0.5rem 0;
-  text-shadow: 1px 1px var(--secondary);
+	font-family: "neulandinline";
+	font-weight: normal;
+	font-style: normal;
+	font-size: 1.4rem;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	color: var(--primary);
+	text-align: center;
+	margin: 0;
+	padding: 0.5rem 0;
+	text-shadow: 1px 1px var(--secondary);
 }
 
 p {
-  padding: 0 1rem;
+	padding: 0 1rem;
 }
 
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 a {
-  color: var(--tertiary);
+	color: var(--tertiary);
 }
 
 a:hover {
-  color: var(--secondary);
+	color: var(--secondary);
 }
 
 li {
-  padding-bottom: 2rem;
+	padding-bottom: 2rem;
 }
