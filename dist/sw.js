@@ -1,4 +1,4 @@
-const STATIC_CACHE = "static-v1";
+const STATIC_CACHE = "static-v2";
 const STATIC_FILES = [
 	"/",
 	"index.html",
@@ -7,6 +7,7 @@ const STATIC_FILES = [
 	"assets/fonts/neuland_inline.woff2",
 	"assets/img/jurassic-park.jpg",
 	"assets/js/app.js",
+	"offline.html",
 ];
 
 self.addEventListener("install", (event) => {
@@ -36,7 +37,13 @@ self.addEventListener("fetch", (event) => {
 				return response;
 			} else {
 				// fetch from the server
-				return fetch(event.request);
+				return fetch(event.request).catch(() => {
+					return caches.open(STATIC_CACHE).then((cache) => {
+						if (event.request.headers.get("accept").includes("text/html")) {
+							return cache.match("/offline.html");
+						}
+					});
+				});
 			}
 		})
 	);
