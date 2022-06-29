@@ -1,0 +1,14 @@
+{
+	"name": "offline-first.nl",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.html",
+	"scripts": {
+		"start": "http-server dist --p=1993"
+	},
+	"author": "Rowdy Rabouw",
+	"license": "ISC",
+	"devDependencies": {
+		"http-server": "^14.1.1"
+	}
+}

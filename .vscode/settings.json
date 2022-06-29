@@ -1,0 +1,11 @@
+{
+	"workbench.colorTheme": "Monokai Pro",
+	"workbench.colorCustomizations": {
+		"editor.background": "#000000"
+	},
+	"files.autoSave": "onFocusChange",
+	"prettier.printWidth": 100,
+	"editor.formatOnSave": true,
+	"editor.fontSize": 16,
+	"editor.renderWhitespace": "trailing"
+}
