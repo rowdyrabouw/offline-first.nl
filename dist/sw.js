@@ -1,3 +1,4 @@
+const DYNAMIC_CACHE = "dynamic-v1";
 const STATIC_CACHE = "static-v2";
 const STATIC_FILES = [
 	"/",
@@ -36,14 +37,21 @@ self.addEventListener("fetch", (event) => {
 				// return from cache
 				return response;
 			} else {
-				// fetch from the server
-				return fetch(event.request).catch(() => {
-					return caches.open(STATIC_CACHE).then((cache) => {
-						if (event.request.headers.get("accept").includes("text/html")) {
-							return cache.match("/offline.html");
-						}
+				// fetch it from the server and save to cache
+				return fetch(event.request)
+					.then((res) => {
+						return caches.open(DYNAMIC_CACHE).then((cache) => {
+							cache.put(event.request.url, res.clone());
+							return res;
+						});
+					})
+					.catch(() => {
+						return caches.open(STATIC_CACHE).then((cache) => {
+							if (event.request.headers.get("accept").includes("text/html")) {
+								return cache.match("/offline.html");
+							}
+						});
 					});
-				});
 			}
 		})
 	);
