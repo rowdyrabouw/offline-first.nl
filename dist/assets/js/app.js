@@ -34,3 +34,30 @@ if ("serviceWorker" in navigator) {
 			});
 	});
 }
+
+const observer = new IntersectionObserver(
+	(entries) => {
+		entries.forEach((entry) => {
+			// if the link is in the viewport
+			if (entry.intersectionRatio === 1) {
+				const isFetched = localStorage.getItem(entry.target.href);
+				// if the link is not fetched yet
+				if (!isFetched) {
+					fetch(entry.target.href, { cache: "no-store" }).then(() => {
+						// save link information
+						localStorage.setItem(entry.target.href, entry.target.innerText);
+					});
+				}
+			}
+		});
+	},
+	{ threshold: 1 }
+);
+
+// get all links on the page without data-skip-prefetch attribute
+const linkList = document.querySelectorAll("a:not([data-skip-prefetch])");
+if (linkList) {
+	linkList.forEach((link) => {
+		observer.observe(link);
+	});
+}
