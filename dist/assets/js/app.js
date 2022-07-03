@@ -4,7 +4,7 @@ if ("serviceWorker" in navigator) {
 			.register("sw.js")
 			.then((reg) => {
 				console.log(
-					"%c[script.js] Service Worker registered",
+					"%c[script.js] Service Worker registered",
 					"color: #00ABD2"
 				);
 				reg.onupdatefound = () => {
@@ -61,3 +61,14 @@ if (linkList) {
 		observer.observe(link);
 	});
 }
+
+// listen for messages from the Service Worker
+navigator.serviceWorker.addEventListener("message", (event) => {
+	if (event.data.action === "setDynamicVersionInLocalStorage") {
+		console.log(
+			`%c[app.js] Dynamic Cache version ${event.data.dynamic} set`,
+			"color: #00ABD2"
+		);
+		localStorage.setItem("DYNAMIC_CACHE", event.data.dynamic);
+	}
+});
