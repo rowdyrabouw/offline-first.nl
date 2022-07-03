@@ -1,5 +1,5 @@
 const DYNAMIC_CACHE = "dynamic-v1";
-const STATIC_CACHE = "static-v2";
+const STATIC_CACHE = "static-v3";
 const STATIC_FILES = [
 	"/",
 	"index.html",
@@ -9,7 +9,10 @@ const STATIC_FILES = [
 	"assets/img/jurassic-park.jpg",
 	"assets/js/app.js",
 	"offline.html",
+	"assets/js/offline.js",
 ];
+
+let setDynamicVersionInLocalStorage = true;
 
 self.addEventListener("install", (event) => {
 	console.log("%c[sw.js] Service Worker installed", "color: #FEC233");
@@ -31,7 +34,10 @@ self.addEventListener("activate", (event) => {
 				// go over all available keys
 				keys.map((key) => {
 					if (key !== STATIC_CACHE && key !== DYNAMIC_CACHE) {
-						console.log("%c[sw.js] Deleting old caches", "color: #FEC233");
+						console.log(
+							`%c[sw.js] Deleting old cache ${key}`,
+							"color: #FEC233"
+						);
 						return caches.delete(key);
 					}
 				})
@@ -44,6 +50,24 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+	console.log(
+		"setDynamicVersionInLocalStorage",
+		setDynamicVersionInLocalStorage
+	);
+	if (setDynamicVersionInLocalStorage) {
+		event.waitUntil(
+			(async () => {
+				// get the client
+				const client = await clients.get(event.clientId);
+				// send a message to the client
+				client.postMessage({
+					action: "setDynamicVersionInLocalStorage",
+					dynamic: DYNAMIC_CACHE,
+				});
+				setDynamicVersionInLocalStorage = false;
+			})()
+		);
+	}
 	event.respondWith(
 		// look at all caches for a match on the key (= request)
 		caches.match(event.request).then((response) => {
