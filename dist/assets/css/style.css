@@ -78,6 +78,10 @@ a:hover {
 	color: var(--secondary);
 }
 
-li {
+ol li {
 	padding-bottom: 2rem;
+}
+
+ul li {
+	padding-bottom: 0.5rem;
 }
