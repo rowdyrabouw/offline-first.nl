@@ -13,7 +13,6 @@ self.addEventListener("install", (event) => {
 	console.log("%c[sw.js] Service Worker installed", "color: #FEC233");
 	event.waitUntil(
 		caches.open(STATIC_CACHE).then((cache) => {
-			console.log("created!");
 			cache.addAll(STATIC_FILES).then(() => {
 				console.log("%c[sw.js] Files added to static cache", "color: #FEC233");
 				self.skipWaiting();
