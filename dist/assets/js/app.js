@@ -57,6 +57,11 @@ const observer = new IntersectionObserver(
 // get all links on the page without data-skip-prefetch attribute
 const linkList = document.querySelectorAll("a:not([data-skip-prefetch])");
 if (linkList) {
+	console.log(
+		"%c[app.js] Observing links without data-skip-prefetch attribute",
+		"color: #00ABD2"
+	);
+
 	linkList.forEach((link) => {
 		observer.observe(link);
 	});
