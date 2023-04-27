@@ -8,8 +8,8 @@ const retrieveCachedUrls = () => {
 				// retrieve all items from dynamic cache
 				return Promise.all(
 					keys.map((key) => {
-						// only return pages, but ignore offline page
-						if (key.url.endsWith(".html") && !key.url.includes("offline")) {
+						// only return pages (offline page is in static)
+						if (key.url.endsWith(".html")) {
 							urls.push(key.url);
 							return key.url;
 						}
