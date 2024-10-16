@@ -43,13 +43,9 @@ document.querySelector("#trex").addEventListener("click", () => {
   fetchData("Tyrannosaurus");
 });
 
-const fetchData = (dino) => {
-  fetch(`http://localhost:3000/${dino}`)
-    .then(response => response.json())
-    .then(data => {
-      document.querySelector("p").innerHTML = data.description;
-    })
-    .catch(error => {
-      console.error("Error fetching data:", error);
-    });
+
+const fetchData = async (dino) => {
+  const response = await fetch(`http://localhost:3000/${dino}`);
+  const data = await response.json();
+  document.querySelector("p").innerHTML = data.description;
 }

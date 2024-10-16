@@ -21,20 +21,20 @@ self.addEventListener("activate", async () => {
   console.log("%c[sw.js] Service Worker activated", "color: #FEC233");
   await openDatabase();
   console.log("%c[sw.js] IndexedDB available", "color: #FEC233");
-  return self.clients.claim();
 });
 
 self.addEventListener("fetch", (event) => {
-  if (event.request.url.startsWith("http://localhost:3000")) {
+  const url = new URL(event.request.url);
+  if (url.host === "localhost:3000") {
     event.respondWith(
       (async () => {
-        const url = new URL(event.request.url);
-        const cachedResponse = await db.get('dinosaurs', url.pathname.substring(1));
+        const dinosaurName = url.pathname.substring(1);
+        const cachedResponse = await db.get('dinosaurs', dinosaurName);
         if (cachedResponse) {
-          console.log(`%c[sw.js] Returning cached response for ${event.request.url}`, "color: #FEC233");
+          console.log("%c[sw.js] Returning cached response", "color: #FEC233");
           return new Response(JSON.stringify(cachedResponse));
         }
-        console.log(`%c[sw.js] Fetching from ${event.request.url}`, "color: #FEC233");
+        console.log("%c[sw.js] Fetching from network", "color: #FEC233");
         const response = await fetch(event.request);
         const clonedResponse = response.clone();
         const data = await clonedResponse.json();
